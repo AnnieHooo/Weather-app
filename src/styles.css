@@ -29,6 +29,23 @@
   font-size: 50px;
   color: black;
 }
+.current_temp_number {
+  font-size: 50px;
+  color: black;
+}
+
+.unit_group {
+  position: relative;
+  font-size: 25px;
+  top: -20px;
+  color: black;
+}
+.stripe {
+  position: relative;
+  font-size: 25px;
+  top: -20px;
+  color: black;
+}
 .other_weather_stats {
   font-size: 18px;
   padding: 10px 0px 0px 0px;

@@ -42,11 +42,23 @@
               />
               <div class="row current_details">
                 <div class="col-4 current_temp">
-                  <image id="icon" src=""></image>
-                  <span id="current-temperature"></span>
-                  <span id="current-temperature-unit">°</span>
-                  <span class="celcius" id="celcius">C|</span
-                  ><span class="Fahrenheit" id="Fahrenheit">F</span>
+                  <div class="d-flex">
+                    <image id="icon" src=""></image>
+                    <div>
+                      <span
+                        class="current_temp_number"
+                        id="current-temperature"
+                      ></span>
+                      <span class="unit_group" id="current-temperature-unit"
+                        >°</span
+                      >
+                      <span class="unit_group celcius" id="celcius">C</span>
+                      <span class="unit_group">|</span>
+                      <span class="unit_group Fahrenheit" id="Fahrenheit"
+                        >F</span
+                      >
+                    </div>
+                  </div>
                 </div>
                 <div class="col-4 other_weather_stats">
                   <span>Maxmimum temperature: </span><span id="max-temp"></span
