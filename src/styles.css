@@ -1,0 +1,86 @@
+.search_button {
+  background: linear-gradient(30deg, #76ba99, #cee5d0);
+  border-radius: 5px;
+  border-width: 1px;
+  color: black;
+}
+
+.current_location_button {
+  background: linear-gradient(30deg, #76ba99, #cee5d0);
+  border-radius: 5px;
+  border-width: 1px;
+  color: black;
+  position: relative;
+  top: -29px;
+  right: -258px;
+}
+
+.container {
+  margin: 20px auto;
+}
+.current_details {
+  margin: 20px auto;
+}
+.card {
+  background: linear-gradient(30deg, #f4e06d, #ffffde);
+}
+.current_temp {
+  font-size: 50px;
+  color: black;
+}
+.other_weather_stats {
+  font-size: 18px;
+  padding: 10px 0px 0px 0px;
+  color: black;
+}
+.summary {
+  font-size: 18px;
+  color: black;
+  text-transform: capitalize;
+}
+.location {
+  font-size: 40px;
+  color: black;
+  text-transform: capitalize;
+}
+.future_day {
+  font-size: 18px;
+  font-weight: 500;
+  color: black;
+}
+.future_day_icon {
+  font-size: 25px;
+}
+.future_day_hi_temp {
+  color: black;
+}
+.future_day_lo_temp {
+  color: black;
+}
+.celcius {
+  position: relative;
+  font-size: 25px;
+  top: -20px;
+  color: black;
+}
+
+.celcius:hover {
+  color: black;
+  cursor: pointer;
+}
+.celcius:click {
+  color: black;
+  font-size: 30px;
+}
+
+.Fahrenheit {
+  position: relative;
+  font-size: 25px;
+  top: -20px;
+  color: darkgray;
+}
+
+.Fahrenheit:hover {
+  color: black;
+  cursor: pointer;
+}
