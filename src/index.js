@@ -126,7 +126,7 @@ function DisplayCityNameAndWeather(event) {
 //Event listening for the inout city search button to be submitted
 form_search.addEventListener("submit", DisplayCityNameAndWeather);
 
-//-----------Weather by Current Location-----------------------------------------------------------------------
+//-----------Weather by Current Location when click OR when default-----------------------------------------------------------------------
 //Converting coordinates to city name for display
 function showCity(response) {
   let city_name = response.data[0].name;
@@ -161,3 +161,4 @@ let current_location_search = document.querySelector(
   "#current_location_button"
 );
 current_location_search.addEventListener("click", currentlocation_by_coord);
+navigator.geolocation.getCurrentPosition(showPosition);
