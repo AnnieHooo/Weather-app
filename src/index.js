@@ -161,4 +161,4 @@ let current_location_search = document.querySelector(
   "#current_location_button"
 );
 current_location_search.addEventListener("click", currentlocation_by_coord);
-navigator.geolocation.getCurrentPosition(showPosition);
+//navigator.geolocation.getCurrentPosition(showPosition);
