@@ -1,5 +1,5 @@
 //Displaying current day and time
-let now = new Date(); //this is not local time
+let today = null;
 
 //calculate the time/day based on timestamp from API response
 function formatDate(timestamp) {
@@ -14,6 +14,7 @@ function formatDate(timestamp) {
   ];
   let date = new Date(timestamp);
   let day = days[date.getDay()];
+  let today = day; //this is going to be used in forecast
   let hour = date.getHours();
   let min = date.getMinutes();
   if (hour < 10) {
@@ -185,7 +186,7 @@ function showPosition(position) {
   let apiUrl_weather = `${api_weather_main}&lat=${lat}&lon=${long}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl_weather).then(showTemperature);
 
-  let api_geocoding_reverse_main = `http://api.openweathermap.org/geo/1.0/reverse?`;
+  let api_geocoding_reverse_main = `https://api.openweathermap.org/geo/1.0/reverse?`;
   let apiUrl_geocoding_reverse = `${api_geocoding_reverse_main}&lat=${lat}&lon=${long}&limit=5&appid=${apiKey}`;
   axios.get(apiUrl_geocoding_reverse).then(showCity);
 }
@@ -200,3 +201,5 @@ let current_location_search = document.querySelector(
   "#current_location_button"
 );
 current_location_search.addEventListener("click", currentlocation_by_coord);
+
+//-----------Weather forecast next 5 days-----------------------------------------------------------------------
