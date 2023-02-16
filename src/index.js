@@ -25,6 +25,11 @@ function formatDate(timestamp) {
   return `${day} ${hour}:${min}`;
 }
 
+//Declaring celcius temperature variables for conversion to oF when required;
+let celciusTemperature = null;
+let celciusTemperature_Max = null;
+let celciusTemperature_Min = null;
+
 //-----------common function for both city name search and current location search------------------------
 //Display weather information after search input (whether by city name or by current location) is submitted
 function showTemperature(response) {
@@ -35,18 +40,20 @@ function showTemperature(response) {
   let humidity = Math.round(response.data.main.humidity);
   let wind = Math.round(response.data.wind.speed);
   let description = response.data.weather[0].description;
-
+  celciusTemperature = response.data.main.temp;
+  celciusTemperature_Max = response.data.main.temp_max;
+  celciusTemperature_Min = response.data.main.temp_min;
   //display extracted weather information from weather API to HTML
   let current_t = document.querySelector("#current-temperature");
   current_t.innerHTML = temperature;
   let max_t = document.querySelector("#max-temp");
-  max_t.innerHTML = `Maximum temperature: ${max_temp}`;
+  max_t.innerHTML = `${max_temp}`;
   let min_t = document.querySelector("#min-temp");
-  min_t.innerHTML = `Minimum temperature: ${min_temp}`;
+  min_t.innerHTML = `${min_temp}`;
   let h = document.querySelector("#humidity");
-  h.innerHTML = `Humidity: ${humidity}`;
+  h.innerHTML = `${humidity}`;
   let w = document.querySelector("#wind");
-  w.innerHTML = `Wind speed: ${wind}`;
+  w.innerHTML = `${wind}`;
   let d = document.querySelector("#description");
   d.innerHTML = description;
   let dateTime = document.querySelector("#date-time");
@@ -56,51 +63,65 @@ function showTemperature(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+}
+//console.log(response.data.main.temp);
+//console.log(response.data.main.humidity);
+//console.log(response.data.wind.speed);
+//console.log(response.data.weather[0].description);
+//console.log(response);
 
-  //console.log(response.data.main.temp);
-  //console.log(response.data.main.humidity);
-  //console.log(response.data.wind.speed);
-  //console.log(response.data.weather[0].description);
-  //console.log(response);
+//----TO BE CONTINUED----------------------------------------------
+//Switch between oC and oF when clicked
+function CtoFconversion(degreeC) {
+  let degreeF = Math.round(((degreeC - 32) * 5) / 9);
+  return degreeF;
+}
 
-  //----TO BE CONTINUED----------------------------------------------
-  ////Switch between oC and oF when clicked
-  //let c = document.querySelector("#celcius");
-  //function changetoC(event) {
-  //  let t = document.querySelector("#temperature");
-  //  t.innerHTML = temperature;
-  //  let c_symbol_max = document.querySelector("#max-temp-unit");
-  //  c_symbol_max.innerHTML = "°C";
-  //  let c_symbol_min = document.querySelector("#min-temp-unit");
-  //  c_symbol_min.innerHTML = "°C";
-  //}
-  //function changetoC_style() {
-  //  let c = document.querySelector("#celcius");
-  //  c.style.color = "black";
-  //  let f = document.querySelector("#Fahrenheit");
-  //  f.style.color = "darkgray";
-  //}
-  //c.addEventListener("click", changetoC);
-  //c.addEventListener("click", changetoC_style);
-  //
-  //let f = document.querySelector("#Fahrenheit");
-  //function changetoF(event) {
-  //  let t = document.querySelector("#temperature");
-  //  t.innerHTML = Math.round(((temperature - 32) * 5) / 9);
-  //  let f_symbol_max = document.querySelector("#max-temp-unit");
-  //  f_symbol_max.innerHTML = "°F";
-  //  let f_symbol_min = document.querySelector("#min-temp-unit");
-  //  f_symbol_min.innerHTML = "°F";
-  //}
-  //function changetoF_style() {
-  //  let f = document.querySelector("#Fahrenheit");
-  //  f.style.color = "black";
-  //  let c = document.querySelector("#celcius");
-  //  c.style.color = "darkgray";
-  //}
-  //f.addEventListener("click", changetoF);
-  //f.addEventListener("click", changetoF_style);
-} //
+function changetoC(event) {
+  //change current, min and max temperature numerical value to C
+  let t = document.querySelector("#current-temperature");
+  t.innerHTML = Math.round(celciusTemperature);
+  let c_max = document.querySelector("#max-temp");
+  c_max.innerHTML = Math.round(celciusTemperature_Max);
+  let c_min = document.querySelector("#min-temp");
+  c_min.innerHTML = Math.round(celciusTemperature_Min);
+
+  //change min and max temperature unit symbol and styling
+  let c_symbol_max = document.querySelector("#max-temp-unit");
+  c_symbol_max.innerHTML = "°C";
+  let c_symbol_min = document.querySelector("#min-temp-unit");
+  c_symbol_min.innerHTML = "°C";
+
+  let c = document.querySelector("#celcius");
+  c.style.color = "black";
+  let f = document.querySelector("#Fahrenheit");
+  f.style.color = "darkgray";
+}
+
+let c = document.querySelector("#celcius");
+c.addEventListener("click", changetoC);
+
+function changetoF(event) {
+  //change current, min and max temperature numerical value to F
+  let t = document.querySelector("#current-temperature");
+  t.innerHTML = CtoFconversion(celciusTemperature);
+  let f_max = document.querySelector("#max-temp");
+  f_max.innerHTML = CtoFconversion(celciusTemperature_Max);
+  let f_min = document.querySelector("#min-temp");
+  f_min.innerHTML = CtoFconversion(celciusTemperature_Min);
+
+  //change min and max temperature unit symbol and styling
+  let f_symbol_max = document.querySelector("#max-temp-unit");
+  f_symbol_max.innerHTML = "°F";
+  let f_symbol_min = document.querySelector("#min-temp-unit");
+  f_symbol_min.innerHTML = "°F";
+  let f = document.querySelector("#Fahrenheit");
+  f.style.color = "black";
+  let c = document.querySelector("#celcius");
+  c.style.color = "darkgray";
+}
+let f = document.querySelector("#Fahrenheit");
+f.addEventListener("click", changetoF);
 //
 ////-----------Weather by City Name-----------------------------------------------------------------------
 //Call weather API by city name if input city is provided and submitted
@@ -179,4 +200,3 @@ let current_location_search = document.querySelector(
   "#current_location_button"
 );
 current_location_search.addEventListener("click", currentlocation_by_coord);
-//navigator.geolocation.getCurrentPosition(showPosition);
