@@ -1,19 +1,29 @@
 //Displaying current day and time
 let now = new Date(); //this is not local time
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let day = days[now.getDay()];
-let hour = now.getHours();
-let min = now.getMinutes();
-let dateTime = document.querySelector("#date-time");
-dateTime.innerHTML = `${day} ${hour}:${min}`;
+
+//calculate the time/day based on timestamp from API response
+function formatDate(timestamp) {
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let date = new Date(timestamp);
+  let day = days[date.getDay()];
+  let hour = date.getHours();
+  let min = date.getMinutes();
+  if (hour < 10) {
+    hour = `0${hour}`;
+  }
+  if (min < 10) {
+    min = `0${min}`;
+  }
+  return `${day} ${hour}:${min}`;
+}
 
 //-----------common function for both city name search and current location search------------------------
 //Display weather information after search input (whether by city name or by current location) is submitted
@@ -25,6 +35,7 @@ function showTemperature(response) {
   let humidity = Math.round(response.data.main.humidity);
   let wind = Math.round(response.data.wind.speed);
   let description = response.data.weather[0].description;
+  let timestamp = response.data.dt * 1000;
 
   //display extracted weather information from weather API to HTML
   let current_t = document.querySelector("#current-temperature");
@@ -39,6 +50,9 @@ function showTemperature(response) {
   w.innerHTML = `Wind speed: ${wind}`;
   let d = document.querySelector("#description");
   d.innerHTML = description;
+  let dateTime = document.querySelector("#date-time");
+  dateTime.innerHTML = `Last updated: ${formatDate(response.data.dt * 1000)}`; //update the function here = formatDate(response.data.dt*1000);
+
   //console.log(response.data.main.temp);
   //console.log(response.data.main.humidity);
   //console.log(response.data.wind.speed);
