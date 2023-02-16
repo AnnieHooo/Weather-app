@@ -35,7 +35,6 @@ function showTemperature(response) {
   let humidity = Math.round(response.data.main.humidity);
   let wind = Math.round(response.data.wind.speed);
   let description = response.data.weather[0].description;
-  let timestamp = response.data.dt * 1000;
 
   //display extracted weather information from weather API to HTML
   let current_t = document.querySelector("#current-temperature");
@@ -51,7 +50,12 @@ function showTemperature(response) {
   let d = document.querySelector("#description");
   d.innerHTML = description;
   let dateTime = document.querySelector("#date-time");
-  dateTime.innerHTML = `Last updated: ${formatDate(response.data.dt * 1000)}`; //update the function here = formatDate(response.data.dt*1000);
+  dateTime.innerHTML = `Last updated: ${formatDate(response.data.dt * 1000)}`;
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 
   //console.log(response.data.main.temp);
   //console.log(response.data.main.humidity);
