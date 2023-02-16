@@ -17,6 +17,7 @@
 
 .container {
   margin: 20px auto;
+  max-width: 900px;
 }
 .current_details {
   margin: 20px auto;
@@ -36,6 +37,8 @@
 .summary {
   font-size: 18px;
   color: black;
+}
+.summary:first-letter {
   text-transform: capitalize;
 }
 .location {
