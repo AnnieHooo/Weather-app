@@ -1,5 +1,5 @@
 //Declaration of global variables
-let today = null; // this is going to be used in forecast
+let search_form = document.querySelector("#search-form");
 let apiKey = "15b6ba0523386a8a73b38b2440a74dea"; //use for API calls for OpenWeatherMap.org
 let units = "metric"; //use for API calls for OpenWeatherMap.org
 let celciusTemperature = null; //for conversion to oF when required
@@ -14,7 +14,7 @@ let nextDaysIds = [
   "next_4_day",
   "next_5_day",
   "next_6_day",
-  "next_7_day",
+  ,
 ];
 let nextDays_MaxIds = [
   "next_1_day_max",
@@ -23,7 +23,7 @@ let nextDays_MaxIds = [
   "next_4_day_max",
   "next_5_day_max",
   "next_6_day_max",
-  "next_7_day_max",
+  ,
 ];
 let nextDays_MinIds = [
   "next_1_day_min",
@@ -32,7 +32,7 @@ let nextDays_MinIds = [
   "next_4_day_min",
   "next_5_day_min",
   "next_6_day_min",
-  "next_7_day_min",
+  ,
 ];
 let nextDays_IconIds = [
   "next_1_day_icon",
@@ -41,7 +41,7 @@ let nextDays_IconIds = [
   "next_4_day_icon",
   "next_5_day_icon",
   "next_6_day_icon",
-  "next_7_day_icon",
+  ,
 ];
 
 let forecast_descriptions_Ids = [
@@ -51,8 +51,257 @@ let forecast_descriptions_Ids = [
   "forecast_description_4",
   "forecast_description_5",
   "forecast_description_6",
-  "forecast_description_7",
+  ,
 ];
+
+let country_codes = {
+  AF: "Afghanistan",
+  AX: "Aland Islands",
+  AL: "Albania",
+  DZ: "Algeria",
+  AS: "American Samoa",
+  AD: "Andorra",
+  AO: "Angola",
+  AI: "Anguilla",
+  AQ: "Antarctica",
+  AG: "Antigua And Barbuda",
+  AR: "Argentina",
+  AM: "Armenia",
+  AW: "Aruba",
+  AU: "Australia",
+  AT: "Austria",
+  AZ: "Azerbaijan",
+  BS: "Bahamas",
+  BH: "Bahrain",
+  BD: "Bangladesh",
+  BB: "Barbados",
+  BY: "Belarus",
+  BE: "Belgium",
+  BZ: "Belize",
+  BJ: "Benin",
+  BM: "Bermuda",
+  BT: "Bhutan",
+  BO: "Bolivia",
+  BA: "Bosnia And Herzegovina",
+  BW: "Botswana",
+  BV: "Bouvet Island",
+  BR: "Brazil",
+  IO: "British Indian Ocean Territory",
+  BN: "Brunei Darussalam",
+  BG: "Bulgaria",
+  BF: "Burkina Faso",
+  BI: "Burundi",
+  KH: "Cambodia",
+  CM: "Cameroon",
+  CA: "Canada",
+  CV: "Cape Verde",
+  KY: "Cayman Islands",
+  CF: "Central African Republic",
+  TD: "Chad",
+  CL: "Chile",
+  CN: "China",
+  CX: "Christmas Island",
+  CC: "Cocos (Keeling) Islands",
+  CO: "Colombia",
+  KM: "Comoros",
+  CG: "Congo",
+  CD: "Congo, Democratic Republic",
+  CK: "Cook Islands",
+  CR: "Costa Rica",
+  CI: 'Cote D"Ivoire',
+  HR: "Croatia",
+  CU: "Cuba",
+  CY: "Cyprus",
+  CZ: "Czech Republic",
+  DK: "Denmark",
+  DJ: "Djibouti",
+  DM: "Dominica",
+  DO: "Dominican Republic",
+  EC: "Ecuador",
+  EG: "Egypt",
+  SV: "El Salvador",
+  GQ: "Equatorial Guinea",
+  ER: "Eritrea",
+  EE: "Estonia",
+  ET: "Ethiopia",
+  FK: "Falkland Islands (Malvinas)",
+  FO: "Faroe Islands",
+  FJ: "Fiji",
+  FI: "Finland",
+  FR: "France",
+  GF: "French Guiana",
+  PF: "French Polynesia",
+  TF: "French Southern Territories",
+  GA: "Gabon",
+  GM: "Gambia",
+  GE: "Georgia",
+  DE: "Germany",
+  GH: "Ghana",
+  GI: "Gibraltar",
+  GR: "Greece",
+  GL: "Greenland",
+  GD: "Grenada",
+  GP: "Guadeloupe",
+  GU: "Guam",
+  GT: "Guatemala",
+  GG: "Guernsey",
+  GN: "Guinea",
+  GW: "Guinea-Bissau",
+  GY: "Guyana",
+  HT: "Haiti",
+  HM: "Heard Island & Mcdonald Islands",
+  VA: "Holy See (Vatican City State)",
+  HN: "Honduras",
+  HK: "Hong Kong",
+  HU: "Hungary",
+  IS: "Iceland",
+  IN: "India",
+  ID: "Indonesia",
+  IR: "Iran, Islamic Republic Of",
+  IQ: "Iraq",
+  IE: "Ireland",
+  IM: "Isle Of Man",
+  IL: "Israel",
+  IT: "Italy",
+  JM: "Jamaica",
+  JP: "Japan",
+  JE: "Jersey",
+  JO: "Jordan",
+  KZ: "Kazakhstan",
+  KE: "Kenya",
+  KI: "Kiribati",
+  KR: "Korea",
+  KP: "North Korea",
+  KW: "Kuwait",
+  KG: "Kyrgyzstan",
+  LA: 'Lao People"s Democratic Republic',
+  LV: "Latvia",
+  LB: "Lebanon",
+  LS: "Lesotho",
+  LR: "Liberia",
+  LY: "Libyan Arab Jamahiriya",
+  LI: "Liechtenstein",
+  LT: "Lithuania",
+  LU: "Luxembourg",
+  MO: "Macao",
+  MK: "Macedonia",
+  MG: "Madagascar",
+  MW: "Malawi",
+  MY: "Malaysia",
+  MV: "Maldives",
+  ML: "Mali",
+  MT: "Malta",
+  MH: "Marshall Islands",
+  MQ: "Martinique",
+  MR: "Mauritania",
+  MU: "Mauritius",
+  YT: "Mayotte",
+  MX: "Mexico",
+  FM: "Micronesia, Federated States Of",
+  MD: "Moldova",
+  MC: "Monaco",
+  MN: "Mongolia",
+  ME: "Montenegro",
+  MS: "Montserrat",
+  MA: "Morocco",
+  MZ: "Mozambique",
+  MM: "Myanmar",
+  NA: "Namibia",
+  NR: "Nauru",
+  NP: "Nepal",
+  NL: "Netherlands",
+  AN: "Netherlands Antilles",
+  NC: "New Caledonia",
+  NZ: "New Zealand",
+  NI: "Nicaragua",
+  NE: "Niger",
+  NG: "Nigeria",
+  NU: "Niue",
+  NF: "Norfolk Island",
+  MP: "Northern Mariana Islands",
+  NO: "Norway",
+  OM: "Oman",
+  PK: "Pakistan",
+  PW: "Palau",
+  PS: "Palestinian Territory, Occupied",
+  PA: "Panama",
+  PG: "Papua New Guinea",
+  PY: "Paraguay",
+  PE: "Peru",
+  PH: "Philippines",
+  PN: "Pitcairn",
+  PL: "Poland",
+  PT: "Portugal",
+  PR: "Puerto Rico",
+  QA: "Qatar",
+  RE: "Reunion",
+  RO: "Romania",
+  RU: "Russian Federation",
+  RW: "Rwanda",
+  BL: "Saint Barthelemy",
+  SH: "Saint Helena",
+  KN: "Saint Kitts And Nevis",
+  LC: "Saint Lucia",
+  MF: "Saint Martin",
+  PM: "Saint Pierre And Miquelon",
+  VC: "Saint Vincent And Grenadines",
+  WS: "Samoa",
+  SM: "San Marino",
+  ST: "Sao Tome And Principe",
+  SA: "Saudi Arabia",
+  SN: "Senegal",
+  RS: "Serbia",
+  SC: "Seychelles",
+  SL: "Sierra Leone",
+  SG: "Singapore",
+  SK: "Slovakia",
+  SI: "Slovenia",
+  SB: "Solomon Islands",
+  SO: "Somalia",
+  ZA: "South Africa",
+  GS: "South Georgia And Sandwich Isl.",
+  ES: "Spain",
+  LK: "Sri Lanka",
+  SD: "Sudan",
+  SR: "Suriname",
+  SJ: "Svalbard And Jan Mayen",
+  SZ: "Swaziland",
+  SE: "Sweden",
+  CH: "Switzerland",
+  SY: "Syrian Arab Republic",
+  TW: "Taiwan",
+  TJ: "Tajikistan",
+  TZ: "Tanzania",
+  TH: "Thailand",
+  TL: "Timor-Leste",
+  TG: "Togo",
+  TK: "Tokelau",
+  TO: "Tonga",
+  TT: "Trinidad And Tobago",
+  TN: "Tunisia",
+  TR: "Turkey",
+  TM: "Turkmenistan",
+  TC: "Turks And Caicos Islands",
+  TV: "Tuvalu",
+  UG: "Uganda",
+  UA: "Ukraine",
+  AE: "United Arab Emirates",
+  GB: "United Kingdom",
+  US: "United States",
+  UM: "United States Outlying Islands",
+  UY: "Uruguay",
+  UZ: "Uzbekistan",
+  VU: "Vanuatu",
+  VE: "Venezuela",
+  VN: "Vietnam",
+  VG: "Virgin Islands, British",
+  VI: "Virgin Islands, U.S.",
+  WF: "Wallis And Futuna",
+  EH: "Western Sahara",
+  YE: "Yemen",
+  ZM: "Zambia",
+  ZW: "Zimbabwe",
+};
 
 //calculate the time/day based on timestamp from API response
 function formatDate_Current(timestamp) {
@@ -109,13 +358,13 @@ function formatDate_Forecast(timestamp) {
 
 //-----------common function for both city name search and current location search------------------------
 function showForecast(response) {
-  for (let i = 1; i < 8; i++) {
+  for (let i = 1; i < 7; i++) {
     let forecast_min = Math.round(response.data.daily[i].temp.min);
     let forecast_max = Math.round(response.data.daily[i].temp.max);
     let nextDay_Max = document.querySelector(`#${nextDays_MaxIds[i - 1]}`);
-    nextDay_Max.innerHTML = `${forecast_max}°C`;
+    nextDay_Max.innerHTML = `${forecast_max}°`;
     let nextDay_Min = document.querySelector(`#${nextDays_MinIds[i - 1]}`);
-    nextDay_Min.innerHTML = `${forecast_min}°C`;
+    nextDay_Min.innerHTML = `${forecast_min}°`;
     forecast_max_values[i - 1] = forecast_max;
     forecast_min_values[i - 1] = forecast_min;
     let forecast_day = formatDate_Forecast(response.data.daily[i].dt * 1000);
@@ -142,6 +391,7 @@ function showForecast(response) {
 //Display weather information after search input (whether by city name or by current location) is submitted
 function showTemperature(response) {
   //extracting current weather information from Current Weather API
+  let country_code = response.data.sys.country;
   let temperature = Math.round(response.data.main.temp);
   let max_temp = Math.round(response.data.main.temp_max);
   let min_temp = Math.round(response.data.main.temp_min);
@@ -174,6 +424,11 @@ function showTemperature(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+
+  //display country name based on city
+  let country_name = country_codes[country_code];
+  let country_n = document.querySelector("#country-name");
+  country_n.innerHTML = country_name;
 
   //extracting coordinates from the input city in API response for use in calling forecast API
   let lon = response.data.coord.lon;
@@ -218,13 +473,13 @@ function changetoC(event) {
   f.style.color = "darkgray";
 
   //change forecast to C
-  for (let i = 1; i < 8; i++) {
+  for (let i = 1; i < 7; i++) {
     let forecast_min = forecast_min_values[i - 1];
     let forecast_max = forecast_max_values[i - 1];
     let nextDay_Max = document.querySelector(`#${nextDays_MaxIds[i - 1]}`);
-    nextDay_Max.innerHTML = `${forecast_max}°C`;
+    nextDay_Max.innerHTML = `${forecast_max}°`;
     let nextDay_Min = document.querySelector(`#${nextDays_MinIds[i - 1]}`);
-    nextDay_Min.innerHTML = `${forecast_min}°C`;
+    nextDay_Min.innerHTML = `${forecast_min}°`;
   }
 }
 
@@ -252,13 +507,13 @@ function changetoF(event) {
   c.style.color = "darkgray";
 
   //change forecast to oF
-  for (let i = 1; i < 8; i++) {
+  for (let i = 1; i < 7; i++) {
     let forecast_min = CtoFconversion(forecast_min_values[i - 1]);
     let forecast_max = CtoFconversion(forecast_max_values[i - 1]);
     let nextDay_Max = document.querySelector(`#${nextDays_MaxIds[i - 1]}`);
-    nextDay_Max.innerHTML = `${forecast_max}°F`;
+    nextDay_Max.innerHTML = `${forecast_max}°`;
     let nextDay_Min = document.querySelector(`#${nextDays_MinIds[i - 1]}`);
-    nextDay_Min.innerHTML = `${forecast_min}°F`;
+    nextDay_Min.innerHTML = `${forecast_min}°`;
   }
 }
 let f = document.querySelector("#Fahrenheit");
@@ -268,9 +523,8 @@ f.addEventListener("click", changetoF);
 //Call weather API by city name if input city is provided and submitted
 function DisplayCityNameAndWeather(event) {
   event.preventDefault();
-  let inputCity = document.querySelector("#search_box");
   let displayCity = document.querySelector("#city-name");
-
+  let inputCity = document.querySelector("#search_box");
   let api_weather_main = `https://api.openweathermap.org/data/2.5/weather?`;
   let apiUrl_weather = `${api_weather_main}&q=${inputCity.value}&appid=${apiKey}&units=${units}`;
   //get API by axios, handle error and call functon to display weather information
@@ -311,14 +565,20 @@ form_search.addEventListener("submit", DisplayCityNameAndWeather);
 //Converting coordinates to city name for display
 function showCity(response) {
   let city_name = response.data[0].name;
+  let country_code = response.data[0].country;
+  let country_name = country_codes[country_code];
   let cn = document.querySelector("#city-name");
   cn.innerHTML = city_name;
+  let country_n = document.querySelector("#country-name");
+  country_n.innerHTML = country_name;
+
   //console.log(response.data[0].name);
   //console.log(response);
 }
 
 //Call weather API by coordinates if the current location button is clicked
 function showPosition(position) {
+  search_form.reset();
   let lat = position.coords.latitude;
   let long = position.coords.longitude;
   let apiKey = "15b6ba0523386a8a73b38b2440a74dea";

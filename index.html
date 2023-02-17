@@ -22,125 +22,133 @@
   <body>
     <div class="container">
       <div class="row card-container">
-        <div class="col-12">
-          <div class="card" style="width: 100%">
-            <div class="card-body">
-              <form id="search-form">
-                <input
-                  type="text"
-                  class="search"
-                  placeholder="Enter your location"
-                  id="search_box"
-                />
-                <input class="search_button" type="submit" value="Search" />
-              </form>
+        <div class="card" style="width: 100%">
+          <div class="card-body">
+            <form id="search-form">
               <input
-                id="current_location_button"
-                class="current_location_button"
-                type="submit"
-                value="Current Location"
+                type="text"
+                class="search"
+                placeholder="Enter city name..."
+                id="search_box"
               />
-              <div class="row current_details">
-                <div class="col-4 current_temp">
-                  <div class="d-flex">
-                    <image id="icon" src=""></image>
-                    <div>
-                      <span
-                        class="current_temp_number"
-                        id="current-temperature"
-                      ></span>
-                      <span class="unit_group" id="current-temperature-unit"
-                        >°</span
-                      >
-                      <span class="unit_group celcius" id="celcius">C</span>
-                      <span class="unit_group">|</span>
-                      <span class="unit_group Fahrenheit" id="Fahrenheit"
-                        >F</span
-                      >
-                    </div>
+              <input class="search_button" type="submit" value="Search" />
+            </form>
+            <input
+              id="current_location_button"
+              class="current_location_button"
+              type="submit"
+              value="Current Location"
+            />
+            <div class="row current_details">
+              <div class="col-4 current_temp">
+                <div class="d-flex">
+                  <image id="icon" src=""></image>
+                  <div>
+                    <span
+                      class="current_temp_number"
+                      id="current-temperature"
+                    ></span>
+                    <span class="unit_group" id="current-temperature-unit"
+                      >°</span
+                    >
+                    <span class="unit_group celcius" id="celcius">C</span>
+                    <span class="unit_group">|</span>
+                    <span class="unit_group Fahrenheit" id="Fahrenheit">F</span>
                   </div>
                 </div>
-                <div class="col-4 other_weather_stats">
-                  <span>Maxmimum temperature: </span><span id="max-temp"></span
-                  ><span id="max-temp-unit">°C </span><br />
-                  <span>Minimum temperature: </span><span id="min-temp"></span
-                  ><span id="min-temp-unit">°C </span><br />
-                  <span>Humidity: </span><span id="humidity"></span
-                  ><span id="humidity-unit"> % </span>
-                  <br />
-                  <span>Wind speed: </span><span id="wind"></span
-                  ><span id="wind-unit"> km/h </span>
-                  <br />
-                </div>
-                <div class="col-4">
-                  <div class="location" id="city-name"></div>
-                  <div class="summary" id="date-time"></div>
-                  <div class="summary" id="description"></div>
-                </div>
               </div>
-              <div class="row">
-                <div class="col-1">
+              <div class="col-4 other_weather_stats">
+                <span>Maxmimum temperature: </span><span id="max-temp"></span
+                ><span id="max-temp-unit">°C </span><br />
+                <span>Minimum temperature: </span><span id="min-temp"></span
+                ><span id="min-temp-unit">°C </span><br />
+                <span>Humidity: </span><span id="humidity"></span
+                ><span id="humidity-unit"> % </span>
+                <br />
+                <span>Wind speed: </span><span id="wind"></span
+                ><span id="wind-unit"> km/h </span>
+                <br />
+              </div>
+              <div class="col-4">
+                <div class="location city" id="city-name"></div>
+                <div class="location country" id="country-name"></div>
+                <div class="summary" id="date-time"></div>
+                <div class="summary" id="description"></div>
+              </div>
+            </div>
+            <div class="container text-center future_forecast_section">
+              <div class="row forecast">
+                <div class="col-2">
                   <div class="future_day" id="next_1_day">Day 1</div>
-                  <div class="future_day" id="forecast_description_1"></div>
+                  <div
+                    class="future_day_description"
+                    id="forecast_description_1"
+                  ></div>
                   <div class="future_day_icon">
                     <img src="" id="next_1_day_icon" />
                   </div>
                   <div class="future_day_hi_temp" id="next_1_day_max">28°C</div>
                   <div class="future_day_lo_temp" id="next_1_day_min">19°C</div>
                 </div>
-                <div class="col-1">
+                <div class="col-2">
                   <div class="future_day" id="next_2_day">Day 2</div>
-                  <div class="future_day" id="forecast_description_2"></div>
+                  <div
+                    class="future_day_description"
+                    id="forecast_description_2"
+                  ></div>
                   <div class="future_day_icon">
                     <img src="" id="next_2_day_icon" />
                   </div>
                   <div class="future_day_hi_temp" id="next_2_day_max">20°C</div>
                   <div class="future_day_lo_temp" id="next_2_day_min">17°C</div>
                 </div>
-                <div class="col-1">
+                <div class="col-2">
                   <div class="future_day" id="next_3_day">Day 3</div>
-                  <div class="future_day" id="forecast_description_3"></div>
+                  <div
+                    class="future_day_description"
+                    id="forecast_description_3"
+                  ></div>
                   <div class="future_day_icon">
                     <img src="" id="next_3_day_icon" />
                   </div>
                   <div class="future_day_hi_temp" id="next_3_day_max">21°C</div>
                   <div class="future_day_lo_temp" id="next_3_day_min">17°C</div>
                 </div>
-                <div class="col-1">
+                <div class="col-2">
                   <div class="future_day" id="next_4_day">Day 4</div>
-                  <div class="future_day" id="forecast_description_4"></div>
+                  <div
+                    class="future_day_description"
+                    id="forecast_description_4"
+                  ></div>
                   <div class="future_day_icon">
                     <img src="" id="next_4_day_icon" />
                   </div>
                   <div class="future_day_hi_temp" id="next_4_day_max">22°C</div>
                   <div class="future_day_lo_temp" id="next_4_day_min">17°C</div>
                 </div>
-                <div class="col-1">
+                <div class="col-2">
                   <div class="future_day" id="next_5_day">Day 5</div>
-                  <div class="future_day" id="forecast_description_5"></div>
+                  <div
+                    class="future_day_description"
+                    id="forecast_description_5"
+                  ></div>
                   <div class="future_day_icon">
                     <img src="" id="next_5_day_icon" />
                   </div>
                   <div class="future_day_hi_temp" id="next_5_day_max">23°C</div>
                   <div class="future_day_lo_temp" id="next_5_day_min">18°C</div>
                 </div>
-                <div class="col-1">
+                <div class="col-2">
                   <div class="future_day" id="next_6_day">Day 6</div>
-                  <div class="future_day" id="forecast_description_6"></div>
+                  <div
+                    class="future_day_description"
+                    id="forecast_description_6"
+                  ></div>
                   <div class="future_day_icon">
                     <img src="" id="next_6_day_icon" />
                   </div>
                   <div class="future_day_hi_temp" id="next_6_day_max">23°C</div>
                   <div class="future_day_lo_temp" id="next_6_day_min">18°C</div>
-                </div>
-                <div class="col-1">
-                  <div class="future_day" id="next_7_day">Day 7</div>
-                  <div class="future_day" id="forecast_description_7"></div>
-                  <div class="future_day_icon">
-                    <img src="" id="next_7_day_icon" />
-                  </div>
-                  <div class="future_day_hi_temp" id="next_7_day_max">23°C</div>
-                  <div class="future_day_lo_temp" id="next_7_day_min">18°C</div>
                 </div>
               </div>
             </div>
